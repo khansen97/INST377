@@ -201,6 +201,35 @@ var organizations = [
 <body>
 <!-- Feel free to add empty tags. Data shouldn't be here. -->
 	<div id="org_table"></div>
+     <table id = "table" border="1">
+
+	<tr>
+      <td></td>
+      <td></td>
+ 	</tr>
+
+	<tr>
+      <td></td>
+      <td></td>
+ 	</tr>
+
+	<tr>
+      <td></td>
+      <td></td>
+ 	</tr>
+
+	<tr>
+      <td></td>
+      <td></td>
+ 	</tr>
+
+	<tr>
+      <td></td>
+      <td></td>
+ 	</tr>
+
+</table>
+</div>
 
 <script>
 // outputs the first item of the organizations array. Just for testing.
@@ -209,6 +238,59 @@ console.log("test");
 
 // Your JavaScript code goes here
 
+  var row0 = document.getElementById("table").rows[0].cells;
+  var row1 = document.getElementById("table").rows[1].cells;
+  var row2 = document.getElementById("table").rows[2].cells;
+  var row3 = document.getElementById("table").rows[3].cells;
+  var row4 = document.getElementById("table").rows[4].cells;
+
+  var nonprofit = 0;
+  var under10 = 0;
+  var america = 0;
+  var transport = 0;
+  var sectors = 0;
+
+  for (var i = 0; i <organizations.length; i++;) {
+					 var response = organizations[i];
+
+	 if (response["Organization Type"] == "Nonprofit") {
+             nonprofit = nonprofit++;
+           }
+            row0[0].innerHTML = "No. of nonprofit orgs";
+            row0[1].innerHTML = nonprofit;
+
+    //Founding year
+    if((2018 - response["Founding Year"]) < 10){
+    under10 =under10++;
+    }
+    row1[0].innerHTML = "No. of orgs founded less than 10 years ago";
+    row1[1].innerHTML = under10;
+
+
+    //North American
+    if(response["Region"] == "North America"){
+	america.push(response["Region"])
+    }
+    row2[0].innerHTML = "No. of orgs in NA";
+    row2[1].innerHTML = america;
+
+
+    //Transportation
+    if(response["Type of data used"].includes("Transportation")){
+       transport = transport++;
+    }
+    row3[0].innerHTML = "No. of nonprofit orgs";
+    row3[1].innerHTML = transport;
+
+
+    //Other feature
+    if(response["Sectors"].includes("IT and geospatial")){
+    sectors.push(response["Sectors"])
+}
+    row4[0].innerHTML = "No. of orgs in IT sector";
+    row4[1].innerHTML = sectors;
+
+}
 
 </script>
 
