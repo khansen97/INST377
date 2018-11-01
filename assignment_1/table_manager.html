@@ -200,32 +200,32 @@ var organizations = [
 
 <body>
 <!-- Feel free to add empty tags. Data shouldn't be here. -->
-	<div id="org_table"></div>
-     <table id = "table" border="1">
+	div>
+ <table id = "table" border="1">
 
 	<tr>
-      <td></td>
-      <td></td>
+      <td id = "comp"></td>
+      <td id = "compVal"></td>
  	</tr>
 
 	<tr>
-      <td></td>
-      <td></td>
+      <td id = "year"></td>
+      <td id = "yearVal"></td>
  	</tr>
 
 	<tr>
-      <td></td>
-      <td></td>
+      <td id = "na"></td>
+      <td id = "naVal"></td>
  	</tr>
 
 	<tr>
-      <td></td>
-      <td></td>
+      <td id = "transport"></td>
+      <td id = "transportVal"></td>
  	</tr>
 
 	<tr>
-      <td></td>
-      <td></td>
+      <td id = "sector"></td>
+      <td id = "sectorVal"></td>
  	</tr>
 
 </table>
@@ -238,61 +238,48 @@ console.log("test");
 
 // Your JavaScript code goes here
 
-  var row0 = document.getElementById("table").rows[0].cells;
-  var row1 = document.getElementById("table").rows[1].cells;
-  var row2 = document.getElementById("table").rows[2].cells;
-  var row3 = document.getElementById("table").rows[3].cells;
-  var row4 = document.getElementById("table").rows[4].cells;
+  var table = document.getElementById("table");
+var compCount = 0;
+var yearCount = 0;
+var naCount = 0;
+var transCount = 0;
+var secCount = 0;
 
-  var nonprofit = 0;
-  var under10 = 0;
-  var america = 0;
-  var transport = 0;
-  var sectors = 0;
+organizations.forEach(myFunction);
 
-  for (var i = 0; i <organizations.length; i++;) {
-					 var response = organizations[i];
-
-	 if (response["Organization Type"] == "Nonprofit") {
-             nonprofit = nonprofit++;
-           }
-            row0[0].innerHTML = "No. of nonprofit orgs";
-            row0[1].innerHTML = nonprofit;
-
-    //Founding year
-    if((2018 - response["Founding Year"]) < 10){
-    under10 =under10++;
-    }
-    row1[0].innerHTML = "No. of orgs founded less than 10 years ago";
-    row1[1].innerHTML = under10;
-
-
-    //North American
-    if(response["Region"] == "North America"){
-	america.push(response["Region"])
-    }
-    row2[0].innerHTML = "No. of orgs in NA";
-    row2[1].innerHTML = america;
-
-
-    //Transportation
-    if(response["Type of data used"].includes("Transportation")){
-       transport = transport++;
-    }
-    row3[0].innerHTML = "No. of nonprofit orgs";
-    row3[1].innerHTML = transport;
-
-
-    //Other feature
-    if(response["Sectors"].includes("IT and geospatial")){
-    sectors.push(response["Sectors"])
+function myFunction(value) {
+	if(value["Organization Type"] == "Nonprofit"){
+    compCount++;
 }
-    row4[0].innerHTML = "No. of orgs in IT sector";
-    row4[1].innerHTML = sectors;
+document.getElementById("comp").innerHTML = "Number of Nonprofit Companies";
+document.getElementById("compVal").innerHTML = compCount;
 
+	if((2018 - value["Founding Year"]) < 10){
+    yearCount++;
 }
+document.getElementById("year").innerHTML = "Number of Companies under 10 years";
+document.getElementById("yearVal").innerHTML = yearCount;
+
+	if(value["Region"] == "North America"){
+    naCount++;
+}
+document.getElementById("na").innerHTML = "Number of Companies from North America";
+document.getElementById("naVal").innerHTML = naCount;
+
+	if(value["Type of Data Used"] == "Transportation"){
+    transCount++;
+}
+document.getElementById("transport").innerHTML = "Number of transport companies";
+document.getElementById("transportVal").innerHTML = transCount;
+
+	if(value["Sectors"] == "IT and geospatial"){
+    secCount++;
+}
+document.getElementById("sector").innerHTML = "Number of IT and Geospatial companies";
+document.getElementById("sectorVal").innerHTML = secCount;
+}
+
 
 </script>
-
 </body>
 </html>
